@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+            android:id="@+id/content_rg"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:background="#222222"
+            android:gravity="center_vertical">
+            <RadioButton
+                android:id="@+id/rb_home"
+                style="@style/tab_style"
+                android:checked="true"
+                android:drawableTop="@drawable/tab_radio_home_selector"
+                android:text="首页"/>
+            <RadioButton
+                android:id="@+id/rb_shopping"
+                style="@style/tab_style"
+                android:drawableTop="@drawable/tab_radio_shopping_selector"
+                android:text="商城"/>
+            <RadioButton
+                android:id="@+id/rb_order"
+                style="@style/tab_style"
+                android:drawableTop="@drawable/tab_radio_order_selector"
+                android:text="订单"/>
+            <RadioButton
+                android:id="@+id/rb_my"
+                style="@style/tab_style"
+                android:drawableTop="@drawable/tab_radio_mine_selector"
+                android:text="我的"/>
+        </RadioGroup>
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#222222"
+            android:layout_above="@id/content_rg"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/v_line"/>
+
+    </RelativeLayout>
+</layout>

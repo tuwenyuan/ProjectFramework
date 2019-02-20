@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.twy.projectframework.view.TitleView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title"></FrameLayout>
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/view_loading"/>
+
+        <com.twy.projectframework.view.NoNetworkView
+            android:id="@+id/v_no_net"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f4f4f4"
+            android:layout_below="@id/title"
+            android:visibility="gone"/>
+
+        <com.twy.projectframework.view.NoDataView
+            android:id="@+id/v_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:layout_below="@id/title"
+            android:visibility="gone"/>
+
+        <com.twy.projectframework.view.ErrorView
+            android:id="@+id/v_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f4f4f4"
+            android:layout_below="@id/title"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+</layout>

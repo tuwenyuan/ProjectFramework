@@ -84,7 +84,6 @@ public class MyFragment extends BaseFragment {
                         }
                         hideLoding();
                     }
-
                     @Override
                     public void onError(Exception e) {
                         Toast.makeText(getContext(),"发生错误："+e.getMessage(),Toast.LENGTH_SHORT).show();
@@ -94,8 +93,8 @@ public class MyFragment extends BaseFragment {
 
             }
         });
-
     }
+
     private int index;
     public void setIndex(int index){
         this.index = index;

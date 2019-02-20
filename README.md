@@ -34,4 +34,4 @@
       
 #### 效果演示
 
-[img]
+![效果演示](https://github.com/tuwenyuan/ProjectFramework/blob/master/app/src/main/res/mipmap-xxhdpi/project.gif)

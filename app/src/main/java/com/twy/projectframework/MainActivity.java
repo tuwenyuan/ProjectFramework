@@ -1,35 +1,67 @@
 package com.twy.projectframework;
 
-import android.databinding.DataBindingUtil;
-import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.twy.network.business.Net;
 import com.twy.network.interfaces.OnRecvDataListener;
 import com.twy.projectframework.base.BaseActivity;
 import com.twy.projectframework.databinding.ActivityMainBinding;
 import com.twy.projectframework.listener.OnTitleClickListener;
 import com.twy.projectframework.view.TitleView;
 
+import java.util.Random;
+
 public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
+    //private Random rd = new Random();
 
     @Override
     public View getContentView() {
-        //DataBindingUtil.inflate(getLayoutInflater(),R.layout.activity_main,null,false);
         binding = initView(R.layout.activity_main);
         return binding.getRoot();
     }
 
     @Override
     protected void initHeader(TitleView title) {
+        /*title.showTitleView(null, null, "主页面", null, "点我", new OnTitleClickListener() {
+            @Override
+            public void onLeftClick() {
 
+            }
+
+            @Override
+            public void onRightClick() {
+                showLoading(false);
+                startRequestNetData(service.getUserPost("李四", "123456"), new OnRecvDataListener<User>() {
+                    @Override
+                    public void onRecvData(User o) {
+                        Toast.makeText(MainActivity.this,o.toString(),Toast.LENGTH_SHORT).show();
+                        switch (rd.nextInt(4)){
+                            case 0:
+                                showNoNetView();
+                                break;
+                            case 1:
+                                showNoDataView();
+                                break;
+                            case 2:
+                                showErrorView();
+                                break;
+                            default:
+                                break;
+                        }
+                        hideLoding();
+                    }
+                    @Override
+                    public void onError(Exception e) {
+                        Toast.makeText(MainActivity.this,"发生错误："+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        hideLoding();
+                    }
+                });
+            }
+        },true);*/
     }
 
     @Override

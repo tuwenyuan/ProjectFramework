@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.barlibrary.SimpleImmersionOwner;
+import com.gyf.barlibrary.SimpleImmersionProxy;
 import com.twy.network.business.Net;
 import com.twy.network.business.Observable;
 import com.twy.network.interfaces.OnRecvDataListener;
@@ -26,7 +29,7 @@ import com.twy.projectframework.net.NetConfigMsg;
 import com.twy.projectframework.view.TitleView;
 
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements SimpleImmersionOwner {
 
     public ITestServices service = NetConfigMsg.getService();
     private IRequestNetData requestNetData;
@@ -77,6 +80,56 @@ public abstract class BaseFragment extends Fragment {
 
     public <T> T initView(int id){
         return (T) DataBindingUtil.inflate(getLayoutInflater(),id,null,false);
+    }
+
+    /**
+     * ImmersionBar代理类
+     */
+    private SimpleImmersionProxy mSimpleImmersionProxy = new SimpleImmersionProxy(this);
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        mSimpleImmersionProxy.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mSimpleImmersionProxy.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void initImmersionBar() {
+        ImmersionBar.with(this)
+                .statusBarView(rtBinding.title.statusBar)
+                .statusBarColor(R.color.colorPrimary)
+                .keyboardEnable(true)
+                .navigationBarColor(R.color.colorPrimary).init();
+    }
+
+
+    /**
+     * 是否可以实现沉浸式，当为true的时候才可以执行initImmersionBar方法
+     * Immersion bar enabled boolean.
+     *
+     * @return the boolean
+     */
+    @Override
+    public boolean immersionBarEnabled() {
+        return true;
+    }
+
+    /*protected void setImmersionBarIsDark(boolean isDark){
+        ((BaseActivity)getActivity()).mImmersionBar.statusBarView(rtBinding.title.statusBar)
+                .statusBarDarkFont(isDark, 0.2f)
+                .init();
+    }*/
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSimpleImmersionProxy.onDestroy();
     }
 
     protected void showLoading(boolean isBgTransparent){

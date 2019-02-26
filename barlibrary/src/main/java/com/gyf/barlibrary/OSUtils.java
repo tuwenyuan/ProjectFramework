@@ -1,12 +1,15 @@
 package com.gyf.barlibrary;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
 import java.lang.reflect.Method;
 
 /**
  * 手机系统判断
- * Created by geyifeng on 2017/4/18.
+ *
+ * @author geyifeng
+ * @date 2017/4/18
  */
 public class OSUtils {
 
@@ -105,6 +108,16 @@ public class OSUtils {
     }
 
     /**
+     * 判断是否为emui3.x版本
+     * Is emui 3 x boolean.
+     *
+     * @return the boolean
+     */
+    public static boolean isEMUI3_x() {
+        return OSUtils.isEMUI3_0() || OSUtils.isEMUI3_1();
+    }
+
+    /**
      * 判断是否为flymeOS
      * Is flyme os boolean.
      *
@@ -179,9 +192,9 @@ public class OSUtils {
 
     private static String getSystemProperty(String key, String defaultValue) {
         try {
-            Class<?> clz = Class.forName("android.os.SystemProperties");
-            Method get = clz.getMethod("get", String.class, String.class);
-            return (String) get.invoke(clz, key, defaultValue);
+            @SuppressLint("PrivateApi") Class<?> clz = Class.forName("android.os.SystemProperties");
+            Method method = clz.getMethod("get", String.class, String.class);
+            return (String) method.invoke(clz, key, defaultValue);
         } catch (Exception e) {
             e.printStackTrace();
         }

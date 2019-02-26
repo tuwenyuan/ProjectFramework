@@ -3,10 +3,10 @@ package com.twy.projectframework;
 import android.view.View;
 import android.widget.Toast;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.twy.network.interfaces.OnRecvDataListener;
 import com.twy.projectframework.base.BaseFragment;
 import com.twy.projectframework.databinding.FragmentMyBinding;
-import com.twy.projectframework.listener.IRequestNetData;
 import com.twy.projectframework.listener.OnTitleClickListener;
 import com.twy.projectframework.view.TitleView;
 
@@ -98,5 +98,16 @@ public class MyFragment extends BaseFragment {
     private int index;
     public void setIndex(int index){
         this.index = index;
+    }
+
+    @Override
+    public void initImmersionBar() {
+        if(index%2==0){
+            super.initImmersionBar();
+        }else{
+            ImmersionBar.with(this).statusBarView(rtBinding.title.statusBar)
+                .statusBarDarkFont(true, 0.2f)
+                .init();
+        }
     }
 }

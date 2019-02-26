@@ -1,43 +1,114 @@
 package com.gyf.barlibrary;
 
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 /**
- * ImmersionFragment沉浸式基类，因为fragment是基于activity之上的，
- * 为了能够在fragment使用沉浸式而fragment之间又相互不影响，必须实现immersionInit方法，
- * 原理是当用户可见才执行沉浸式初始化
- * 已过时，当配合vieapager使用时，请自行使用懒加载方式实现,或者参看我的demo里的BaseLazyFragment
- * Created by geyifeng on 2017/5/12.
+ * 为了方便在Fragment使用沉浸式请继承ImmersionFragment，
+ * 请在immersionBarEnabled方法中实现你的沉浸式代码，
+ * ImmersionProxy已经做了ImmersionBar.with(mFragment).destroy()了，所以不需要在你的代码中做这个处理了
+ * 如果不能继承，请拷贝代码到你的项目中
+ *
+ * @author geyifeng
+ * @date 2017 /5/12
  */
-@Deprecated
-public abstract class ImmersionFragment extends Fragment {
+public abstract class ImmersionFragment extends Fragment implements ImmersionOwner {
+
+    /**
+     * ImmersionBar代理类
+     */
+    private ImmersionProxy mImmersionProxy = new ImmersionProxy(this);
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if ((isVisibleToUser && isResumed())) {
-            onResume();
-        }
+        mImmersionProxy.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mImmersionProxy.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mImmersionProxy.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (getUserVisibleHint() && immersionEnabled()) {
-            immersionInit();
-        }
+        mImmersionProxy.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mImmersionProxy.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mImmersionProxy.onDestroy();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        mImmersionProxy.onHiddenChanged(hidden);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mImmersionProxy.onConfigurationChanged(newConfig);
     }
 
     /**
-     * 当前页面Fragment支持沉浸式初始化。子类可以重写返回false，设置不支持沉浸式初始化
+     * 懒加载，在view初始化完成之前执行
+     * On lazy after view.
+     */
+    @Override
+    public void onLazyBeforeView() {
+    }
+
+    /**
+     * 懒加载，在view初始化完成之后执行
+     * On lazy before view.
+     */
+    @Override
+    public void onLazyAfterView() {
+    }
+
+    /**
+     * Fragment用户可见时候调用
+     * On visible.
+     */
+    @Override
+    public void onVisible() {
+    }
+
+    /**
+     * Fragment用户不可见时候调用
+     * On invisible.
+     */
+    @Override
+    public void onInvisible() {
+    }
+
+    /**
+     * 是否可以实现沉浸式，当为true的时候才可以执行initImmersionBar方法
      * Immersion bar enabled boolean.
      *
      * @return the boolean
      */
-    @Deprecated
-    protected boolean immersionEnabled() {
+    @Override
+    public boolean immersionBarEnabled() {
         return true;
     }
-
-    @Deprecated
-    protected abstract void immersionInit();
 }

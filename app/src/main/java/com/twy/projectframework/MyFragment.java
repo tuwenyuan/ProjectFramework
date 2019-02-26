@@ -1,5 +1,6 @@
 package com.twy.projectframework;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Toast;
 
@@ -105,9 +106,16 @@ public class MyFragment extends BaseFragment {
         if(index%2==0){
             super.initImmersionBar();
         }else{
+            //支持4.4以下版本
+            /*
+            * ImmersionBar.with(this).statusBarView(rtBinding.title.statusBar)
+                    .statusBarDarkFont(true, 0.2f)
+                    .init();*/
             ImmersionBar.with(this).statusBarView(rtBinding.title.statusBar)
-                .statusBarDarkFont(true, 0.2f)
-                .init();
+                    .autoDarkModeEnable(true)
+                    .statusBarColor(R.color.white)
+                    .navigationBarColor(R.color.white)
+                    .init();
         }
     }
 }

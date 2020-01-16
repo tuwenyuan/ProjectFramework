@@ -19,7 +19,7 @@ public interface ITestServices {
     @POST("servlet/GetUser")
     Observable<User> getUserPost(@Query(value = "userName", encoded = true) String userName, @Query("password") String password);
     @Headers({"header1:header1value","header2:header2value"})
-    @GET("servlet/GetUser")
+    //@GET("servlet/GetUser")
     Observable<User> getUserGet(@Query(value = "userName", encoded = true) String userName, @Query("password") String password);
     @Multipart
     @POST("servlet/UploadFile")

@@ -1,17 +1,12 @@
 package com.twy.projectframework;
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.twy.network.interfaces.OnRecvDataListener;
 import com.twy.projectframework.base.BaseActivity;
 import com.twy.projectframework.databinding.ActivityMainBinding;
-import com.twy.projectframework.listener.OnTitleClickListener;
 import com.twy.projectframework.view.TitleView;
-
-import java.util.Random;
 
 public class MainActivity extends BaseActivity {
 

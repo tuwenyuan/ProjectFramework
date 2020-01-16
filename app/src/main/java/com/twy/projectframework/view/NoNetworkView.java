@@ -1,7 +1,7 @@
 package com.twy.projectframework.view;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

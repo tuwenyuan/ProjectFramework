@@ -1,6 +1,9 @@
 package com.twy.projectframework;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Region;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,6 +37,8 @@ public class MyFragment extends BaseFragment {
             @Override
             public void onRightClick() {
                 Toast.makeText(getContext(),"右边",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MyFragment.this.getContext(),TestActivity.class);
+                startActivity(intent);
             }
         },true);
     }
@@ -94,7 +99,26 @@ public class MyFragment extends BaseFragment {
 
             }
         });
+
+        /*binding.tpv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(i>= Region.Op.values().length-1){
+                    i = 0;
+                }else {
+                    i++;
+                }
+                binding.tpv.setPorterDuffXfermode(Region.Op.values()[i]);
+            }
+        });*/
+
+
+
+
+
     }
+
+    public int i = 0;
 
     private int index;
     public void setIndex(int index){
